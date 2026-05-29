@@ -7,7 +7,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from insurance_crm import DB, ContactHunter, MailMerge, Memory
+from insurance_crm import DB, ContactHunter, MailMerge, Memory, import_xlsx
 from insurance_crm.seed import seed_templates
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -29,7 +29,7 @@ def main():
     db = get_db()
     st.sidebar.title("Insurance MM CRM")
     page = st.sidebar.radio("View", [
-        "Dashboard", "Hunt Contacts", "Contacts",
+        "Dashboard", "Hunt Contacts", "Import XLSX", "Contacts",
         "Mail Merge", "Drafts", "Memory / Recall", "Templates",
     ])
 
@@ -37,6 +37,8 @@ def main():
         page_dashboard(db)
     elif page == "Hunt Contacts":
         page_hunt(db)
+    elif page == "Import XLSX":
+        page_import(db)
     elif page == "Contacts":
         page_contacts(db)
     elif page == "Mail Merge":
@@ -113,6 +115,29 @@ def page_hunt(db: DB):
             f"Contacts saved: {res['contacts_saved']}"
         )
         st.session_state["last_company_id"] = res["company_id"]
+
+
+def page_import(db: DB):
+    st.header("Import prospects (XLSX)")
+    st.caption(
+        "Upload an Excel workbook with a Companies sheet and a Contacts sheet. "
+        "See examples/sample_prospects.xlsx for the column layout."
+    )
+    sample = Path(__file__).parent / "examples" / "sample_prospects.xlsx"
+    if sample.exists():
+        with open(sample, "rb") as f:
+            st.download_button("Download sample_prospects.xlsx",
+                               f.read(), file_name="sample_prospects.xlsx")
+
+    uploaded = st.file_uploader("Workbook (.xlsx)", type=["xlsx"])
+    if uploaded and st.button("Import", type="primary"):
+        tmp = DATA_DIR / "_uploaded.xlsx"
+        tmp.write_bytes(uploaded.read())
+        result = import_xlsx(db, tmp)
+        st.success(
+            f"Loaded {result['companies']} companies and "
+            f"{result['contacts']} contacts."
+        )
 
 
 def page_contacts(db: DB):

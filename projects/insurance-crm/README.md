@@ -78,6 +78,30 @@ Anywhere in a template's subject or body, use Jinja2 expressions:
 - `{{ company }}` `{{ company_domain }}`
 - `{{ email }}`
 
+## Sample files
+
+`examples/sample_prospects.xlsx` — 10 companies + 23 contacts across
+manufacturing, healthcare, real estate, technology, hospitality, etc. Two
+sheets (`Companies`, `Contacts`) with header columns matching the importer.
+
+`examples/sample_outreach_letter.docx` — Microsoft Word letter with real
+`MERGEFIELD` codes (`first_name`, `last_name`, `title`, `company`,
+`merge_date`). In Word: **Mailings → Select Recipients → Use Existing List**,
+pick the .xlsx, and choose the `Contacts` sheet. Word's native mail merge
+fills the fields.
+
+Regenerate either file: `python examples/generate_samples.py`
+
+Bulk-load the Excel into the CRM:
+
+```python
+from insurance_crm import DB, import_xlsx
+import_xlsx(DB(), "examples/sample_prospects.xlsx")
+```
+
+Or use the **Import XLSX** page in the Streamlit UI to upload any workbook
+matching the same column layout.
+
 ## Default templates seeded
 
 - `cold_intro_risk_manager` — to Risk Mgr / VP Risk

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "source": {
+    "upstream": "https://github.com/obra/superpowers",
+    "vendored_at": ".claude/plugins/superpowers/",
+    "license": "MIT"
+  },
+  "plugin": {
+    "name": "superpowers",
+    "version": "5.1.0",
+    "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
+    "homepage": "https://github.com/obra/superpowers"
+  },
+  "summary": "Superpowers is a coaching playbook for Claude Code. It teaches Claude to brainstorm before coding, write plans, do TDD, debug to root cause, verify before claiming done, and request peer review \u2014 by exposing a set of skills (SKILL.md files) that Claude reads on demand.",
+  "skill_count": 14,
+  "skills": [
+    {
+      "name": "brainstorming",
+      "description": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
+      "overview": "",
+      "path": "skills/brainstorming/SKILL.md",
+      "supporting_files": [
+        "skills/brainstorming/scripts/frame-template.html",
+        "skills/brainstorming/scripts/helper.js",
+        "skills/brainstorming/scripts/server.cjs",
+        "skills/brainstorming/scripts/start-server.sh",
+        "skills/brainstorming/scripts/stop-server.sh",
+        "skills/brainstorming/spec-document-reviewer-prompt.md",
+        "skills/brainstorming/visual-companion.md"
+      ]
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+      "overview": "You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history \u2014 you construct exactly what they need. This also preserves your own context for coordination work.",
+      "path": "skills/dispatching-parallel-agents/SKILL.md",
+      "supporting_files": []
+    },
+    {
+      "name": "executing-plans",
+      "description": "Use when you have a written implementation plan to execute in a separate session with review checkpoints",
+      "overview": "Load plan, review critically, execute all tasks, report when complete.",
+      "path": "skills/executing-plans/SKILL.md",
+      "supporting_files": []
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup",
+      "overview": "Guide completion of development work by presenting clear options and handling chosen workflow.",
+      "path": "skills/finishing-a-development-branch/SKILL.md",
+      "supporting_files": []
+    },
+    {
+      "name": "receiving-code-review",
+      "description": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation",
+      "overview": "Code review requires technical evaluation, not emotional performance.",
+      "path": "skills/receiving-code-review/SKILL.md",
+      "supporting_files": []
+    },
+    {
+      "name": "requesting-code-review",
+      "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements",
+      "overview": "",
+      "path": "skills/requesting-code-review/SKILL.md",
+      "supporting_files": [
+        "skills/requesting-code-review/code-reviewer.md"
+      ]
+    },
+    {
+      "name": "subagent-driven-development",
+      "description": "Use when executing implementation plans with independent tasks in the current session",
+      "overview": "",
+      "path": "skills/subagent-driven-development/SKILL.md",
+      "supporting_files": [
+        "skills/subagent-driven-development/code-quality-reviewer-prompt.md",
+        "skills/subagent-driven-development/implementer-prompt.md",
+        "skills/subagent-driven-development/spec-reviewer-prompt.md"
+      ]
+    },
+    {
+      "name": "systematic-debugging",
+      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+      "overview": "Random fixes waste time and create new bugs. Quick patches mask underlying issues.",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "supporting_files": [
+        "skills/systematic-debugging/CREATION-LOG.md",
+        "skills/systematic-debugging/condition-based-waiting-example.ts",
+        "skills/systematic-debugging/condition-based-waiting.md",
+        "skills/systematic-debugging/defense-in-depth.md",
+        "skills/systematic-debugging/find-polluter.sh",
+        "skills/systematic-debugging/root-cause-tracing.md",
+        "skills/systematic-debugging/test-academic.md",
+        "skills/systematic-debugging/test-pressure-1.md",
+        "skills/systematic-debugging/test-pressure-2.md",
+        "skills/systematic-debugging/test-pressure-3.md"
+      ]
+    },
+    {
+      "name": "test-driven-development",
+      "description": "Use when implementing any feature or bugfix, before writing implementation code",
+      "overview": "Write the test first. Watch it fail. Write minimal code to pass.",
+      "path": "skills/test-driven-development/SKILL.md",
+      "supporting_files": [
+        "skills/test-driven-development/testing-anti-patterns.md"
+      ]
+    },
+    {
+      "name": "using-git-worktrees",
+      "description": "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback",
+      "overview": "Ensure work happens in an isolated workspace. Prefer your platform's native worktree tools. Fall back to manual git worktrees only when no native tool is available.",
+      "path": "skills/using-git-worktrees/SKILL.md",
+      "supporting_files": []
+    },
+    {
+      "name": "using-superpowers",
+      "description": "Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions",
+      "overview": "",
+      "path": "skills/using-superpowers/SKILL.md",
+      "supporting_files": [
+        "skills/using-superpowers/references/codex-tools.md",
+        "skills/using-superpowers/references/copilot-tools.md",
+        "skills/using-superpowers/references/gemini-tools.md"
+      ]
+    },
+    {
+      "name": "verification-before-completion",
+      "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+      "overview": "Claiming work is complete without verification is dishonesty, not efficiency.",
+      "path": "skills/verification-before-completion/SKILL.md",
+      "supporting_files": []
+    },
+    {
+      "name": "writing-plans",
+      "description": "Use when you have a spec or requirements for a multi-step task, before touching code",
+      "overview": "Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.",
+      "path": "skills/writing-plans/SKILL.md",
+      "supporting_files": [
+        "skills/writing-plans/plan-document-reviewer-prompt.md"
+      ]
+    },
+    {
+      "name": "writing-skills",
+      "description": "Use when creating new skills, editing existing skills, or verifying skills work before deployment",
+      "overview": "**Writing skills IS Test-Driven Development applied to process documentation.**",
+      "path": "skills/writing-skills/SKILL.md",
+      "supporting_files": [
+        "skills/writing-skills/anthropic-best-practices.md",
+        "skills/writing-skills/examples/CLAUDE_MD_TESTING.md",
+        "skills/writing-skills/graphviz-conventions.dot",
+        "skills/writing-skills/persuasion-principles.md",
+        "skills/writing-skills/render-graphs.js",
+        "skills/writing-skills/testing-skills-with-subagents.md"
+      ]
+    }
+  ],
+  "hooks": [
+    "hooks/hooks-cursor.json",
+    "hooks/hooks.json",
+    "hooks/run-hook.cmd",
+    "hooks/session-start"
+  ],
+  "install": {
+    "official_marketplace": "/plugin install superpowers@claude-plugins-official",
+    "custom_marketplace": [
+      "/plugin marketplace add obra/superpowers-marketplace",
+      "/plugin install superpowers@superpowers-marketplace"
+    ],
+    "vendored_in_this_repo": "Already present at .claude/plugins/superpowers/"
+  }
+}
